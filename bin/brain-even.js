@@ -1,13 +1,14 @@
 import readlineSync, { question, questionEMail } from 'readline-sync';
-import brainGamesBegin from '../src/cli.js';
 
 const getRandomNumber = (min, max) => {
   Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 };
-const name = brainGamesBegin();
 const beginOfTheGame = () => {
+  console.log('Welcome to the Brain Games!');
+  const name = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${name}!`);
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
   // eslint-disable-next-line no-shadow
 
@@ -26,6 +27,9 @@ const beginOfTheGame = () => {
       break;
     } else if (answer === 'no') {
       console.log(`'no' is wrong answer ;(. Correct answer was 'yes'.\nLet's try again, ${name}!`);
+      break;
+    } else {
+      console.log(`${answer} is wrong answer ;(. Correct answer was 'yes'.\nLet's try again, ${name}!`);
       break;
     }
   }
