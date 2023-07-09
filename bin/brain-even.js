@@ -1,11 +1,7 @@
-import readlineSync, { question, questionEMail } from 'readline-sync';
+import readlineSync from 'readline-sync';
+import { getRandomNumber } from '../src/index.js';
 
-const getRandomNumber = (min, max) => {
-  Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-};
-const beginOfTheGame = () => {
+const brainEvenGame = () => {
   console.log('Welcome to the Brain Games!');
   const name = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${name}!`);
@@ -29,7 +25,7 @@ const beginOfTheGame = () => {
       console.log(`'no' is wrong answer ;(. Correct answer was 'yes'.\nLet's try again, ${name}!`);
       break;
     } else {
-      console.log(`${answer} is wrong answer ;(. Correct answer was 'yes'.\nLet's try again, ${name}!`);
+      console.log(`${answer} is wrong answer ;(.\nLet's try again, ${name}!`);
       break;
     }
   }
@@ -38,4 +34,4 @@ const beginOfTheGame = () => {
   }
 };
 
-beginOfTheGame();
+brainEvenGame();
