@@ -1,4 +1,4 @@
-import readlineSync, { question, questionEMail } from 'readline-sync';
+import readlineSync from 'readline-sync';
 import { getRandomNumber, getRandomOperation } from '../src/index.js';
 
 const brainCalcGame = () => {
@@ -9,6 +9,7 @@ const brainCalcGame = () => {
   // eslint-disable-next-line no-shadow
 
   const findResultOfOperation = (num1, operation, num2) => {
+    // eslint-disable-next-line default-case
     switch (operation) {
       case '+':
         return num1 + num2;
@@ -17,6 +18,7 @@ const brainCalcGame = () => {
       case '*':
         return num1 * num2;
     }
+    return null;
   };
 
   const accum = [];
@@ -27,12 +29,12 @@ const brainCalcGame = () => {
     const operation = getRandomOperation();
     console.log(`Question: ${number1} ${operation} ${number2} `);
     const answer = readlineSync.question('Your answer: ');
-    if (findResultOfOperation(number1, operation, number2) == answer) {
+    if (findResultOfOperation(number1, operation, number2).toString() === answer) {
       i += 1;
       accum.push(answer);
       console.log('Correct!');
-    } else if (findResultOfOperation(number1, operation, number2) != answer) {
-      console.log(`${answer} is wrong answer ;(. Correct answer was ${findResultOfOperation(number1, operation, number2)}.\nLet's try again, ${name}!`);
+    } else if (findResultOfOperation(number1, operation, number2).toString() !== answer) {
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${findResultOfOperation(number1, operation, number2)}'.\nLet's try again, ${name}!`);
       break;
     }
   }

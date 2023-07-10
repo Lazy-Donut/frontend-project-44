@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync';
-import { getRandomNumber, getRandomOperation } from '../src/index.js';
+import { getRandomNumber } from '../src/index.js';
 
 const findNumberInProgression = () => {
   console.log('Welcome to the Brain Games!');
@@ -24,11 +24,11 @@ const findNumberInProgression = () => {
     const number = randomNumberInArray;
     console.log(`Question: ${randomArray.join(' ')}`);
     const answer = readlineSync.question('Your answer: ');
-    if (number == answer) {
+    if (number.toString() === answer) {
       i += 1;
       accum.push(answer);
       console.log('Correct!');
-    } else if (number != answer) {
+    } else if (number.toString() !== answer) {
       console.log(`'${answer}' is wrong answer ;(. Correct answer was '${number}'.\nLet's try again, ${name}!`);
       break;
     }

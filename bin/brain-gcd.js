@@ -16,12 +16,12 @@ const findGcdGame = () => {
     const number2 = getRandomNumber(2, 20);
     console.log(`Question: ${number1} ${number2} `);
     const answer = readlineSync.question('Your answer: ');
-    if (getGcd(number1, number2) == answer) {
+    if (getGcd(number1, number2).toString() === answer) {
       i += 1;
       accum.push(answer);
       console.log('Correct!');
-    } else if (getGcd(number1, number2) != answer) {
-      console.log(`${answer} is wrong answer ;(. Correct answer was ${getGcd(number1, number2)}.\nLet's try again, ${name}!`);
+    } else if (getGcd(number1, number2).toString() !== answer) {
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${getGcd(number1, number2)}'.\nLet's try again, ${name}!`);
       break;
     }
   }
