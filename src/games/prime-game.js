@@ -1,6 +1,5 @@
-import readlineSync from 'readline-sync';
-import { getRandomNumber } from '../index.js';
-import brainGamesBegin from '../cli.js';
+import { getRandomNumber } from '../utils.js';
+import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
 
 const isPrime = (number) => {
   if (number < 2) {
@@ -25,21 +24,14 @@ const isPrimeGame = () => {
   let i = 0;
   while (i < 3) {
     const number = getRandomNumber(1, 30);
-    console.log(`Question: ${number}`);
-    const answer = readlineSync.question('Your answer: ');
-    if ((isPrime(number) === true && answer === 'yes') || (isPrime(number) === false && answer === 'no')) {
+    const answer = questionMessage(number);
+    const correctAnswer = isPrime(number) ? 'yes' : 'no';
+    if (answer === correctAnswer) {
       i += 1;
       accum.push(answer);
       console.log('Correct');
-    } else if (isPrime(number) === false && answer === 'yes') {
-      console.log(`'yes' is wrong answer ;(. Correct answer was 'no'.\nLet's try again, ${name}!`);
-      break;
-    } else if (isPrime(number) === true && answer === 'no') {
-      console.log(`'no' is wrong answer ;(. Correct answer was 'yes'.\nLet's try again, ${name}!`);
-      break;
     } else {
-      console.log(`${answer} is wrong answer ;(.\nLet's try again, ${name}!`);
-      break;
+      wrongAnswerMessage(answer, correctAnswer, name);
     }
   }
   if (accum.length === 3) {

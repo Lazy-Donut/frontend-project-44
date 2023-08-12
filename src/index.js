@@ -1,12 +1,19 @@
-const getRandomNumber = (min, max) => {
-  Math.ceil(min);
-  return Math.floor(Math.random() * (Math.floor(max) - min)) + min;
-};
+import readlineSync from 'readline-sync';
 
-const getRandomOperation = () => {
-  const mathOperation = '+-*';
-  const randomIndex = Math.floor(Math.random() * mathOperation.length);
-  return mathOperation[randomIndex];
-};
+function brainGamesBegin() {
+  console.log('Welcome to the Brain Games!');
+  const name = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${name}!`);
+  return name;
+}
 
-export { getRandomNumber, getRandomOperation };
+function questionMessage(question) {
+  console.log(`Question: ${question}`);
+  return readlineSync.question('Your answer: ');
+}
+
+function wrongAnswerMessage(answer, correctAnswer, name) {
+  console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${name}!`);
+}
+
+export { brainGamesBegin, questionMessage, wrongAnswerMessage };

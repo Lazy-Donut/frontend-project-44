@@ -1,12 +1,15 @@
-import readlineSync from 'readline-sync';
-import { getRandomNumber, getRandomOperation } from '../index.js';
-import brainGamesBegin from '../cli.js';
+import { getRandomNumber } from '../utils.js';
+import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
 
 const brainCalcGame = () => {
   const name = brainGamesBegin();
   console.log('What is the result of the expression?');
   // eslint-disable-next-line no-shadow
-
+  const getRandomOperation = () => {
+    const mathOperation = '+-*';
+    const randomIndex = getRandomNumber(0, mathOperation.length);
+    return mathOperation[randomIndex];
+  };
   const findResultOfOperation = (num1, operation, num2) => {
     // eslint-disable-next-line default-case
     switch (operation) {
@@ -26,14 +29,14 @@ const brainCalcGame = () => {
     const number1 = getRandomNumber(2, 20);
     const number2 = getRandomNumber(2, 20);
     const operation = getRandomOperation();
-    console.log(`Question: ${number1} ${operation} ${number2} `);
-    const answer = readlineSync.question('Your answer: ');
+
+    const answer = questionMessage(`${number1} ${operation} ${number2}`);
     if (findResultOfOperation(number1, operation, number2).toString() === answer) {
       i += 1;
       accum.push(answer);
       console.log('Correct!');
     } else if (findResultOfOperation(number1, operation, number2).toString() !== answer) {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${findResultOfOperation(number1, operation, number2)}'.\nLet's try again, ${name}!`);
+      wrongAnswerMessage(answer, findResultOfOperation(number1, operation, number2), name);
       break;
     }
   }

@@ -1,6 +1,5 @@
-import readlineSync from 'readline-sync';
-import { getRandomNumber } from '../index.js';
-import brainGamesBegin from '../cli.js';
+import { getRandomNumber } from '../utils.js';
+import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
 
 const getGcd = (a, b) => ((a % b) ? getGcd(b, a % b) : Math.abs(b));
 
@@ -13,14 +12,13 @@ const findGcdGame = () => {
   while (i < 3) {
     const number1 = getRandomNumber(2, 20);
     const number2 = getRandomNumber(2, 20);
-    console.log(`Question: ${number1} ${number2} `);
-    const answer = readlineSync.question('Your answer: ');
+    const answer = questionMessage(`${number1} ${number2}`);
     if (getGcd(number1, number2).toString() === answer) {
       i += 1;
       accum.push(answer);
       console.log('Correct!');
     } else if (getGcd(number1, number2).toString() !== answer) {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${getGcd(number1, number2)}'.\nLet's try again, ${name}!`);
+      wrongAnswerMessage(answer, getGcd(number1, number2), name);
       break;
     }
   }
