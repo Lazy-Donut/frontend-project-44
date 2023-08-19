@@ -32,6 +32,7 @@ const isPrimeGame = () => {
       console.log('Correct');
     } else {
       wrongAnswerMessage(answer, correctAnswer, name);
+      break;
     }
   }
   if (accum.length === 3) {
