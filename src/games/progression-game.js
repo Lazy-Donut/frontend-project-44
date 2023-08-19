@@ -1,4 +1,4 @@
-import { getRandomNumber } from '../utils.js';
+import getRandomNumber from '../utils.js';
 import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
 
 const generateRandomArray = () => {
@@ -24,6 +24,7 @@ const findNumberInProgression = () => {
     const randomIndex = getRandomNumber(0, arrayLength);
     const number = randomArray[randomIndex];
     randomArray[randomIndex] = '..';
+
     const answer = questionMessage(randomArray.join(' '));
     if (number.toString() === answer) {
       i += 1;

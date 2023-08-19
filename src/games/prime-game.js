@@ -1,4 +1,4 @@
-import { getRandomNumber } from '../utils.js';
+import getRandomNumber from '../utils.js';
 import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
 
 const isPrime = (number) => {
