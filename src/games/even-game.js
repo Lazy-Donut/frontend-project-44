@@ -1,6 +1,7 @@
 import { getRandomNumber } from '../utils.js';
 import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
 
+const isEven = (number) => (number % 2 === 0);
 const brainEvenGame = () => {
   const name = brainGamesBegin();
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
@@ -11,7 +12,7 @@ const brainEvenGame = () => {
   while (i < 3) {
     const number = getRandomNumber(2, 10);
     const answer = questionMessage(number);
-    const correctAnswer = (number % 2 === 0) ? 'yes' : 'no';
+    const correctAnswer = isEven(number) ? 'yes' : 'no';
     if (answer === correctAnswer) {
       i += 1;
       accum.push(answer);
