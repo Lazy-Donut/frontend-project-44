@@ -1,5 +1,5 @@
 import getRandomNumber from '../utils.js';
-import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
+import gameEngine from '../index.js';
 
 const isPrime = (number) => {
   if (number < 2) {
@@ -16,28 +16,14 @@ const isPrime = (number) => {
 };
 
 const isPrimeGame = () => {
-  const name = brainGamesBegin();
-  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-  // eslint-disable-next-line no-shadow
-
-  const accum = [];
-  let i = 0;
-  while (i < 3) {
+  const questions = [];
+  const correctAnswers = [];
+  for (let i = 0; i < 3; i += 1) {
     const number = getRandomNumber(1, 30);
-    const answer = questionMessage(number);
-    const correctAnswer = isPrime(number) ? 'yes' : 'no';
-    if (answer === correctAnswer) {
-      i += 1;
-      accum.push(answer);
-      console.log('Correct');
-    } else {
-      wrongAnswerMessage(answer, correctAnswer, name);
-      break;
-    }
+    questions.push(number);
+    correctAnswers.push(isPrime(number) ? 'yes' : 'no');
   }
-  if (accum.length === 3) {
-    console.log(`Congratulations, ${name}!`);
-  }
+  gameEngine('Answer "yes" if given number is prime. Otherwise answer "no".', questions, correctAnswers);
 };
 
 export default isPrimeGame;

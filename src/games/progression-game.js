@@ -1,5 +1,5 @@
 import getRandomNumber from '../utils.js';
-import { brainGamesBegin, questionMessage, wrongAnswerMessage } from '../index.js';
+import gameEngine from '../index.js';
 
 const generateRandomArray = () => {
   const randomArray = [];
@@ -13,30 +13,17 @@ const generateRandomArray = () => {
 };
 
 const findNumberInProgression = () => {
-  const name = brainGamesBegin();
-  console.log('What number is missing in the progression?');
-
-  const accum = [];
-  let i = 0;
-  while (i < 3) {
+  const questions = [];
+  const correctAnswers = [];
+  for (let i = 0; i < 3; i += 1) {
     const randomArray = generateRandomArray();
     const arrayLength = randomArray.length;
     const randomIndex = getRandomNumber(0, arrayLength);
     const number = randomArray[randomIndex];
     randomArray[randomIndex] = '..';
-
-    const answer = questionMessage(randomArray.join(' '));
-    if (number.toString() === answer) {
-      i += 1;
-      accum.push(answer);
-      console.log('Correct!');
-    } else if (number.toString() !== answer) {
-      wrongAnswerMessage(answer, number, name);
-      break;
-    }
+    questions.push(randomArray.join(' '));
+    correctAnswers.push(number.toString());
   }
-  if (accum.length === 3) {
-    console.log(`Congratulations, ${name}!`);
-  }
+  gameEngine('What number is missing in the progression?', questions, correctAnswers);
 };
 export default findNumberInProgression;
