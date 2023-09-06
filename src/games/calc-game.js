@@ -1,6 +1,7 @@
 import getRandomNumber from '../utils.js';
-import gameEngine from '../index.js';
+import gameEngine, { numberOfRounds } from '../index.js';
 
+const gameRules = 'What is the result of the expression?';
 const findResultOfOperation = (num1, operation, num2) => {
   switch (operation) {
     case '+':
@@ -10,25 +11,21 @@ const findResultOfOperation = (num1, operation, num2) => {
     case '*':
       return num1 * num2;
     default:
-      return null;
+      throw new Error('Unknown operation!');
   }
-};
-const getRandomOperation = () => {
-  const mathOperation = '+-*';
-  const randomIndex = getRandomNumber(0, mathOperation.length);
-  return mathOperation[randomIndex];
 };
 const brainCalcGame = () => {
   const questions = [];
   const correctAnswers = [];
-  for (let i = 0; i < 3; i += 1) {
+  for (let i = 0; i < numberOfRounds; i += 1) {
     const number1 = getRandomNumber(2, 20);
     const number2 = getRandomNumber(2, 20);
-    const operation = getRandomOperation();
+    const mathOperation = '+-*';
+    const operation = mathOperation[getRandomNumber(0, mathOperation.length)];
     questions.push(`${number1} ${operation} ${number2}`);
     correctAnswers.push(findResultOfOperation(number1, operation, number2).toString());
   }
-  gameEngine('What is the result of the expression?', questions, correctAnswers);
+  gameEngine(gameRules, questions, correctAnswers);
 };
 
 export default brainCalcGame;

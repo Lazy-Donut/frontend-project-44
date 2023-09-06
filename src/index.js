@@ -1,43 +1,26 @@
 import readlineSync from 'readline-sync';
-import brainGamesBegin from './cli.js';
 
+export const numberOfRounds = 3;
 const questionMessage = (question) => {
   console.log(`Question: ${question}`);
   return readlineSync.question('Your answer: ');
 };
 
-const wrongAnswerMessage = (answer, correctAnswer, name) => {
-  console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${name}!`);
-};
-
-const correctMessage = () => {
-  console.log('Correct!');
-};
-
-const congratulationsMessage = (name) => {
-  console.log(`Congratulations, ${name}!`);
-};
-
 const gameEngine = (rules, questions, correctAnswers) => {
-  const name = brainGamesBegin();
+  console.log('Welcome to the Brain Games!');
+  const name = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${name}!`);
   console.log(rules);
-  // eslint-disable-next-line no-shadow
-  const accum = [];
-  let i = 0;
-  while (i < 3) {
+  for (let i = 0; i < numberOfRounds; i += 1) {
     const answer = questionMessage(questions[i]);
     if (answer === correctAnswers[i]) {
-      i += 1;
-      accum.push(answer);
-      correctMessage();
+      console.log('Correct!');
     } else {
-      wrongAnswerMessage(answer, correctAnswers[i], name);
-      break;
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswers[i]}'.\nLet's try again, ${name}!`);
+      return;
     }
   }
-  if (accum.length === 3) {
-    congratulationsMessage(name);
-  }
+  console.log(`Congratulations, ${name}!`);
 };
 
 export default gameEngine;
